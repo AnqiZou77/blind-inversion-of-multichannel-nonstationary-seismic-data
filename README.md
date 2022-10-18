@@ -16,12 +16,10 @@ Zou, A.Q, Wang, Y.F, Wang, D.H, 2022, Blind Inversion of Multichannel Nonstation
 
 ## Usage
 
-Using matlab IDE, run the default `training.py` or `testing.py`.
+Using matlab IDE, and
 Run Demo4nonstatAIinversion.m for AI inversion when wavelet is known.
 Run Demo4nonstatWaveEst.m for wavelet estimation when AI is known.
 Run Demo4NSBD.m for blind inversion for AI and wavelet.
-
-the parameter
 
 
 ### dataset

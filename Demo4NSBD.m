@@ -36,48 +36,48 @@ ulf = real(G1'*Ulf*G2'/m/n);
 Zlf = exp(2*ulf);
 
 %% inversion parameter for WITV
-paraW.lambda = 0; % l1 0
-paraW.beta = 0.01;  % 0.01 
-paraW.mu = 0.001; % l2  0.001
-paraW.gama = 0.05; % DtDx 0.05
-paraW.sigma = 0.0005;  % Dt 0.0005
-paraW.yita = 0.0005; % Dx 0.0005
-paraW.maxIter = 20; 
-paraW.tol = 1e-3;
-paraW.method = 1; % 1 : ATV ,2 : TV
-Lw = 63;
-paraZ.tol = 1e-5; % 1-6
-paraZ.lambda = 2; % 2
-paraZ.mu = 12; % 15
-paraZ.beta = 0.05; % 0.05 parameter for Low frequency
-paraZ.gama = 0.05; % 0.05 parameter for low frequency 
-paraZ.tao = 2; % parameter for wtv Ht 0.9
-paraZ.muw = 0.0018; % parameter for wtv 0.0018
-paraZ.maxIter = 20; % 200
-outfilepre = '.\output4BDWITV\WITV_';
-kmax = 8;
-
-%% inversion parameter for TV
-% paraW.lambda = 0; % l1
-% paraW.beta = 0.01;  % l1 0.01
-% paraW.mu = 0.001; % l2  0.005
+% paraW.lambda = 0; % l1 0
+% paraW.beta = 0.01;  % 0.01 
+% paraW.mu = 0.001; % l2  0.001
 % paraW.gama = 0.05; % DtDx 0.05
 % paraW.sigma = 0.0005;  % Dt 0.0005
 % paraW.yita = 0.0005; % Dx 0.0005
-% paraW.maxIter = 20;
-% paraW.tol = 1e-5;
+% paraW.maxIter = 20; 
+% paraW.tol = 1e-3;
 % paraW.method = 1; % 1 : ATV ,2 : TV
 % Lw = 63;
-% 
-% paraZ.tol = 1e-6; % 1-6
-% paraZ.lambda = 2; %15.3 13
-% paraZ.mu = 150; % 10
-% paraZ.beta = 0.05; % low frequency 3.5
-% paraZ.gama = 0.05; % low frequency 3.5
+% paraZ.tol = 1e-5; % 1-6
+% paraZ.lambda = 2; % 2
+% paraZ.mu = 12; % 15
+% paraZ.beta = 0.05; % 0.05 parameter for Low frequency
+% paraZ.gama = 0.05; % 0.05 parameter for low frequency 
+% paraZ.tao = 2; % parameter for wtv Ht 0.9
+% paraZ.muw = 0.0018; % parameter for wtv 0.0018
 % paraZ.maxIter = 20; % 200
-% paraZ.method = 1; % 1 for TV; 2 for ATV
-% outfilepre = 'output4BDTV\TV_';
-% kmax = 20;
+% outfilepre = '.\output4BDWITV\WITV_';
+% kmax = 8;
+
+%% inversion parameter for TV
+paraW.lambda = 0; % l1
+paraW.beta = 0.01;  % l1 0.01
+paraW.mu = 0.001; % l2  0.005
+paraW.gama = 0.05; % DtDx 0.05
+paraW.sigma = 0.0005;  % Dt 0.0005
+paraW.yita = 0.0005; % Dx 0.0005
+paraW.maxIter = 20;
+paraW.tol = 1e-5;
+paraW.method = 1; % 1 : ATV ,2 : TV
+Lw = 63;
+
+paraZ.tol = 1e-6; % 1-6
+paraZ.lambda = 2; %2
+paraZ.mu = 300; % 150
+paraZ.beta = 0.05; % low frequency 3.5
+paraZ.gama = 0.05; % low frequency 3.5
+paraZ.maxIter = 20; % 200
+paraZ.method = 1; % 1 for TV; 2 for ATV
+outfilepre = 'output4BDTV\TV_';
+kmax = 20;
 
 %% ½»Ìæµü´ú·´ÑÝ (alternating minimization algorithm)
 k = 0;
@@ -97,8 +97,8 @@ while k<kmax
     % AI inversion
     k = k+1
     G = WQa*Dt;
-    [Z_inversion,Unew,err,~] = ZinversionWITV( Z,G,D_obs,Unew,Ulf,FL,paraZ);
-    %     [Z_inversion,U,err,~] = ZinversionTV( Z,G,D_obs,Unew,Ulf,FL,paraZ);
+%     [Z_inversion,Unew,err,~] = ZinversionWITV( Z,G,D_obs,Unew,Ulf,FL,paraZ);
+    [Z_inversion,Unew,err,~] = ZinversionTV( Z,G,D_obs,Unew,Ulf,FL,paraZ);
     errZ(1:length(err),k) = err;
     Zfilename = [outfilepre 'Z_inversion_' num2str(k) '.mat'];
     save(Zfilename,'Z_inversion');

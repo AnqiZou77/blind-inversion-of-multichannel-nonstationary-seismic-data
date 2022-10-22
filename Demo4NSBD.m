@@ -97,8 +97,8 @@ while k<kmax
     % AI inversion
     k = k+1
     G = WQa*Dt;
-    [Z_inversion,Unew,err,~] = ZinversionWITV( Z,G,D_obs,Unew,Ulf,FL,paraZ);
-%     [Z_inversion,Unew,err,~] = ZinversionTV( Z,G,D_obs,Ulf,Ulf,FL,paraZ);
+    [Z_inversion,Unew,err,~] = ZinversionWITV( Z,G,D_obs,ulf,Ulf,FL,paraZ);
+%     [Z_inversion,Unew,err,~] = ZinversionTV( Z,G,D_obs,ulf,Ulf,FL,paraZ);
     errZ(1:length(err),k) = err;
     Zfilename = [outfilepre 'Z_inversion_' num2str(k) '.mat'];
     save(Zfilename,'Z_inversion');
